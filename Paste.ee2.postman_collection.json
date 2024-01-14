@@ -1,0 +1,134 @@
+{
+	"info": {
+		"_postman_id": "58dd2552-2974-4fe8-87bf-15a3d4590067",
+		"name": "Paste.ee2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31969038"
+	},
+	"item": [
+		{
+			"name": "submit a paste",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let resp = pm.response.json();\r",
+							"pm.environment.set('id',resp.id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let random = Date.now();\r",
+							"pm.environment.set(\"RandomData\", random)"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "uVSL0Zd14C05ysUndOiYZfzoxfXCFA1zIL8Az4W7r",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"encrypted\": false,\r\n \"description\":\"test\",\r\n \"sections\":\r\n[{\"name\":\"Section1\",\"syntax\":\"autodetect\",\"contents\":\"{{RandomData}}\"}]} \r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/pastes",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"pastes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get a paste",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "uVSL0Zd14C05ysUndOiYZfzoxfXCFA1zIL8Az4W7r",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/pastes/{{id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"pastes",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete a paste",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"connection": true,
+					"accept": true
+				}
+			},
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "X-Auth-Token",
+						"value": "uVSL0Zd14C05ysUndOiYZfzoxfXCFA1zIL8Az4W7r",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/pastes/{{id}}",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"pastes",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://api.paste.ee/v1"
+		}
+	]
+}
